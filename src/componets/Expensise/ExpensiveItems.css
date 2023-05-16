@@ -1,4 +1,6 @@
-/*I add width 100% if that something will dont display correctly change it */
+li {
+  list-style: none;
+}
 .expense-item {
   display: flex;
   justify-content: space-between;

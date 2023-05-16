@@ -2,17 +2,25 @@ import React from "react";
 import "./NewExpense.css";
 import ExpenseFrom from "./ExpenseFrom.jsx";
 
-const NewExpense = (props) => {
+const NewExpense = ({ addExpenseHandler, setOpenForm, openForm }) => {
   const saveExpenseDataHandler = (enteredExpenseData) => {
     const expenseData = {
       ...enteredExpenseData,
       id: Math.random().toString(),
     };
-    props.addExpenseHandler(expenseData);
+    addExpenseHandler(expenseData);
   };
   return (
     <div className={"new-expense"}>
-      <ExpenseFrom onSaveExpenseData={saveExpenseDataHandler} />
+      {!openForm && (
+        <button onClick={() => setOpenForm(true)}>add new expense</button>
+      )}
+      {openForm && (
+        <ExpenseFrom
+          Action={setOpenForm}
+          saveExpenseDataHandler={saveExpenseDataHandler}
+        />
+      )}
     </div>
   );
 };

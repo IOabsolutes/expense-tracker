@@ -2,7 +2,6 @@ import Expenses from "./componets/Expensise/Expenses.jsx";
 import { useState } from "react";
 import NewExpense from "./componets/NewExpense/NewExpense.jsx";
 import ExpensesFilter from "./componets/ExpenseFilter/ExpenseFilter.jsx";
-import "./App.css";
 import Card from "./UI/Card.jsx";
 const App = () => {
   const [expenses, setExpenses] = useState([
@@ -22,7 +21,7 @@ const App = () => {
       id: 3,
       date: new Date(2023, 6, 2),
       item: "Car",
-      priceAmount: 2233.44,
+      priceAmount: 233.44,
     },
     {
       id: 4,
@@ -31,12 +30,12 @@ const App = () => {
       priceAmount: 333.44,
     },
   ]);
+  const [openForm, setOpenForm] = useState(false);
+  const [selectedYear, setSelectedYear] = useState("");
+
   const addExpenseHandler = (expense) => {
     setExpenses((prev) => [expense, ...prev]);
   };
-
-  const [selectedYear, setSelectedYear] = useState("");
-
   const displayYearHandle = (Year) => {
     setSelectedYear(Year);
   };
@@ -44,9 +43,15 @@ const App = () => {
     <div>
       <Card className={"expenses"}>
         {/* форма для новых items */}
-        <NewExpense addExpenseHandler={addExpenseHandler} />
-        {/* dropdown menu */}
+
+        <NewExpense
+          openForm={openForm}
+          setOpenForm={setOpenForm}
+          addExpenseHandler={addExpenseHandler}
+        />
+
         <div>
+          {/* dropdown menu */}
           <ExpensesFilter
             selected={selectedYear}
             displayYearHandle={displayYearHandle}
